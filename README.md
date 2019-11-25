@@ -17,8 +17,8 @@ Minimal JSON schema validation format.
     + [$unknownKeys](#unknownkeys)
     + [$item](#item)
 - [Shortcuts](#shortcuts)
-    + [Primitives](#primitives)
-    + [Arrays](#arrays)
+  * [Primitives](#primitives)
+  * [Arrays](#arrays)
 - [Custom validators](#custom-validators)
 - [Implementations](#implementations)
 - [License](#license)
@@ -100,7 +100,7 @@ tbd.
 #### $item
 
 ## Shortcuts
-#### Primitives
+### Primitives
 You can define any prop as just value:
 ```json
 {
@@ -118,7 +118,7 @@ It is automatically expanded to following schema:
 }
 ```
 
-#### Arrays
+### Arrays
 Two ways to define array props:
 1. full syntax using `$item` validator:
     ```json
