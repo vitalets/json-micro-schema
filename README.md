@@ -21,6 +21,7 @@ Minimal JSON schema validation format.
   * [Arrays](#arrays)
 - [Custom validators](#custom-validators)
 - [Implementations](#implementations)
+  * [JavaScript](#javascript)
 - [License](#license)
 
 <!-- tocstop -->
@@ -156,7 +157,8 @@ Example of custom `$regexp` validator:
 ```
 
 ## Implementations
-* Javascript
+
+### JavaScript
   * [@vitalets/micro-schema](https://github.com/vitalets/micro-schema)
 
 ## License
