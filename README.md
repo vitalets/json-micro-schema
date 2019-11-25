@@ -97,9 +97,48 @@ Validation output:
 ```
 
 ## Validators
-tbd.
 
 #### $type
+Validates type of value. Can be one of:
+ * `"string"`
+ * `"number"`
+ * `"boolean"`
+ * `"array"`
+
+Example of schema:
+```json
+{
+  "productName": {
+    "$type": "string"
+  }
+}
+```
+
+Valid object:
+```json
+{
+  "productName": "iphone 11"
+}
+```
+
+Invalid object:
+```json
+{
+  "productName": 42
+}
+```
+
+Validation error:
+```json
+{
+  "validator": "$type",
+  "path": "productName",
+  "expectedType": "string",
+  "actualType": "number"
+}
+```
+
+
 #### $required
 #### $maxLength
 #### $minLength
@@ -109,7 +148,7 @@ tbd.
 
 ## Shortcuts
 ### Primitives
-You can define any prop as just a value:
+You can declare any prop as just a value:
 ```json
 {
   "productType": "phone"
@@ -151,9 +190,9 @@ Arrays can be declared in two ways:
 Both variants are identical.
 
 ## Custom validators
-You can define any custom validators for your needs.
+You can declare any custom validators for your needs.
 The only rule is that it should start with `$` and don't conflict with built-in validators.
-Example of custom `$myRegexpValidator` validator:
+Example of custom `$myRegexpValidator`:
 ```json
 {
   "productId": {
@@ -162,7 +201,7 @@ Example of custom `$myRegexpValidator` validator:
   }
 }
 ```
-Particular steps of adding validator depend on implementation library for your programming language.
+Technical implementation of custom validator depends on library and programming language you are using.
 
 ## Implementations
 
