@@ -4,6 +4,7 @@ Minimal JSON schema validation format.
 
 ## Motivation
 Although [JSON Schema](https://json-schema.org/) is old and mature project
+it looks too complex for simple JSON validation purpose.
 This spec is a very simple format for the most common cases.
 
 ## Contents
