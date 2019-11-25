@@ -146,15 +146,16 @@ Both variants are identical.
 ## Custom validators
 You can define any custom validators for your needs.
 The only rule is that it should start with `$` and don't conflict with built-in validators.
-Example of custom `$regexp` validator:
+Example of custom `$myRegexpValidator` validator:
 ```json
 {
   "productId": {
     "$type": "string",
-    "$regexp": "[a-z0-9]+"
+    "$myRegexpValidator": "[a-z0-9]+"
   }
 }
 ```
+Particular steps of adding validator depend on implementation library for your programming language.
 
 ## Implementations
 
