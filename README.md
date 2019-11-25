@@ -101,13 +101,13 @@ tbd.
 
 ## Shortcuts
 ### Primitives
-You can define any prop as just value:
+You can define any prop as just a value:
 ```json
 {
   "productType": "phone"
 }
 ```
-It is automatically expanded to following schema:
+It is automatically expanded to the following schema:
 ```json
 {
   "productType": {
@@ -119,7 +119,7 @@ It is automatically expanded to following schema:
 ```
 
 ### Arrays
-Two ways to define array props:
+Arrays can be declared in two ways:
 1. full syntax using `$item` validator:
     ```json
     {
