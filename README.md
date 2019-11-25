@@ -17,8 +17,8 @@ Minimal JSON schema validation format.
     + [$unknownKeys](#unknownkeys)
     + [$item](#item)
 - [Shortcuts](#shortcuts)
-    + [primitive](#primitive)
-    + [array](#array)
+    + [Primitives](#primitives)
+    + [Arrays](#arrays)
 - [Custom validators](#custom-validators)
 - [Implementations](#implementations)
 - [License](#license)
@@ -100,10 +100,60 @@ tbd.
 #### $item
 
 ## Shortcuts
-#### primitive
-#### array
+#### Primitives
+You can define any prop as just value:
+```json
+{
+  "productType": "phone"
+}
+```
+It is automatically expanded to following schema:
+```json
+{
+  "productType": {
+    "$type": "string",
+    "$required": true,
+    "$values": ["phone"]
+  }
+}
+```
+
+#### Arrays
+Two ways to define array props:
+1. full syntax using `$item` validator:
+    ```json
+    {
+      "tags": {
+        "$type": "array",
+        "$item": {
+          "$type": "string"
+        }
+      }
+    }
+    ```
+2. shortcut syntax using `[]` with single element:
+    ```json
+    {
+      "tags": [{
+        "$type": "string"
+      }]
+    }
+    ```
+
+Both variants are identical.
 
 ## Custom validators
+You can define any custom validators for your needs.
+The only rule is that it should start with `$` and don't conflict with built-in validators.
+Example of custom `$regexp` validator:
+```json
+{
+  "productId": {
+    "$type": "string",
+    "$regexp": "[a-z0-9]+"
+  }
+}
+```
 
 ## Implementations
 * Javascript
