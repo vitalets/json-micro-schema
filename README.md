@@ -2,11 +2,15 @@
 
 Minimal JSON schema validation format.
 
+## Motivation
+Although [JSON Schema](https://json-schema.org/) is old and mature project
+This spec is a very simple format for the most common cases.
+
 ## Contents
 
 <!-- toc -->
 
-- [Motivation](#motivation)
+- [Principles](#principles)
 - [Example](#example)
 - [Validators](#validators)
     + [$type](#type)
@@ -26,10 +30,13 @@ Minimal JSON schema validation format.
 
 <!-- tocstop -->
 
-## Motivation
-Although [JSON Schema](https://json-schema.org/) is old and mature project
-I found it too complex and verbose for simple JSON validation. 
-Instead, I tried to create a very simple format for the most common cases.
+## Principles
+* JSON micro schema is a normal JSON object with validation keywords started with `$`.
+* Built-in list of validators is minimal and covers the most common cases.
+  For other tasks custom validators should be used.
+* Validation process returns array of errors.
+  Each error contains validator name and dot-path to invalid object property.
+  Empty array means validation is ok.
 
 ## Example
 Schema:
@@ -45,7 +52,7 @@ Schema:
     "$maxLength": 255
   },
   "tags": [{
-      "$type": "string"
+    "$type": "string"
   }]
 }
 ```
