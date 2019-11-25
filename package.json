@@ -1,0 +1,21 @@
+{
+  "name": "json-micro-schema",
+  "version": "1.0.0",
+  "description": "Minimal JSON schema validation format",
+  "author": {
+    "name": "Vitaliy Potapov",
+    "email": "noginsk@rambler.ru"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vitalets/json-micro-schema.git"
+  },
+  "scripts": {
+    "toc": "markdown-toc README.md -i",
+    "docs": "npm run toc"
+  },
+  "devDependencies": {
+    "markdown-toc": "^1.2.0"
+  },
+  "license": "MIT"
+}
