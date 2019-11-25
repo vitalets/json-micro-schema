@@ -13,13 +13,13 @@ This spec is a very simple format for the most common cases.
 - [Principles](#principles)
 - [Example](#example)
 - [Validators](#validators)
-    + [$type](#type)
-    + [$required](#required)
-    + [$maxLength](#maxlength)
-    + [$minLength](#minlength)
-    + [$values](#values)
-    + [$unknownKeys](#unknownkeys)
-    + [$item](#item)
+  * [$type](#type)
+  * [$required](#required)
+  * [$maxLength](#maxlength)
+  * [$minLength](#minlength)
+  * [$values](#values)
+  * [$unknownKeys](#unknownkeys)
+  * [$item](#item)
 - [Shortcuts](#shortcuts)
   * [Primitives](#primitives)
   * [Arrays](#arrays)
@@ -74,7 +74,7 @@ Invalid object:
 }
 ```
 
-Validation output:
+Validation errors:
 ```json
 [
   {
@@ -98,12 +98,12 @@ Validation output:
 
 ## Validators
 
-#### $type
-Validates type of value. Can be one of:
- * `"string"`
- * `"number"`
- * `"boolean"`
- * `"array"`
+### $type
+* `string` Validates type of value. Can be one of:
+  * `"string"`
+  * `"number"`
+  * `"boolean"`
+  * `"array"`
 
 Example of schema:
 ```json
@@ -138,13 +138,233 @@ Validation error:
 }
 ```
 
+### $required
+* `boolean` Validates that property exists and not `null|undefined`.
 
-#### $required
-#### $maxLength
-#### $minLength
-#### $values
-#### $unknownKeys
-#### $item
+Example of schema:
+```json
+{
+  "productName": {
+    "$required": true
+  }
+}
+```
+
+Valid object:
+```json
+{
+  "productName": "iphone 11"
+}
+```
+
+Invalid object:
+```json
+{
+  "productName": null
+}
+```
+
+Validation error:
+```json
+{
+  "validator": "$required",
+  "path": "productName"
+}
+```
+
+### $maxLength
+* `number` Validates that property has length less or equal provided value.
+  Applied to `string` or `array`.
+
+Example of schema:
+```json
+{
+  "productName": {
+    "$type": "string",
+    "$maxLength": 10
+  }
+}
+```
+
+Valid object:
+```json
+{
+  "productName": "iphone 11"
+}
+```
+
+Invalid object:
+```json
+{
+  "productName": "very long product name"
+}
+```
+
+Validation error:
+```json
+{
+  "validator": "$maxLength",
+  "path": "productName",
+  "maxLength": 10,
+  "length": 22
+}
+```
+
+### $minLength
+* `number` Validates that property has length more or equal provided value.
+  Applied to `string` or `array`.
+
+Example of schema:
+```json
+{
+  "productName": {
+    "$type": "string",
+    "$minLength": 2
+  }
+}
+```
+
+Valid object:
+```json
+{
+  "productName": "iphone 11"
+}
+```
+
+Invalid object:
+```json
+{
+  "productName": "a"
+}
+```
+
+Validation error:
+```json
+{
+  "validator": "$minLength",
+  "path": "productName",
+  "minLength": 2,
+  "length": 1
+}
+```
+
+### $values
+* `array` Validates that property has one of provided values.
+
+Example of schema:
+```json
+{
+  "productName": {
+    "$type": "string",
+    "$values": ["iphone", "android"]
+  }
+}
+```
+
+Valid object:
+```json
+{
+  "productName": "iphone"
+}
+```
+
+Invalid object:
+```json
+{
+  "productName": "ipad"
+}
+```
+
+Validation error:
+```json
+{
+  "validator": "$values",
+  "path": "productName",
+  "values": ["iphone", "android"],
+  "value": "ipad"
+}
+```
+
+### $unknownKeys
+* `boolean` Allows object to have keys not declared in schema.
+
+Example of schema:
+```json
+{
+  "product": {
+    "$unknownKeys": false,
+    "name": {
+      "$type": "string"
+    }
+  }
+}
+```
+
+Valid object:
+```json
+{
+  "product": {
+     "name": "iphone"
+  }
+}
+```
+
+Invalid object:
+```json
+{
+  "product": {
+     "name": "iphone",
+     "model": "iphone 11"
+  }
+}
+```
+
+Validation error:
+```json
+{
+  "validator": "$unknownKeys",
+  "path": "product.model"
+}
+```
+
+### $item
+* `object` Declares schema for array items. Applied only to `$type: "array"`.
+
+Example of schema:
+```json
+{
+  "tags": {
+    "$type": "array",
+    "$item": {
+      "$type": "string"
+    }
+  }
+}
+```
+
+Valid object:
+```json
+{
+  "tags": [ "mobile", "phone" ]
+}
+```
+
+Invalid object:
+```json
+{
+  "tags": [ 42 ]
+}
+```
+
+Validation error:
+```json
+{
+  "validator": "$type",
+  "path": "tags.0",
+  "expectedType": "string",
+  "actualType": "number"
+}
+```
 
 ## Shortcuts
 ### Primitives
