@@ -21,6 +21,7 @@ This spec is a very simple format for the most common cases.
   * [$values](#values)
   * [$unknownKeys](#unknownkeys)
   * [$item](#item)
+  * [$defaults](#defaults)
 - [Shortcuts](#shortcuts)
   * [Primitives](#primitives)
   * [Arrays](#arrays)
@@ -365,6 +366,53 @@ Validation error:
   "expectedType": "string",
   "actualType": "number"
 }
+```
+
+### $defaults
+* `object` Declares schema that will be merged to current and all nested schemas.
+
+Example of schema:
+```json
+{
+  "$defaults": {
+    "$required": true
+  },
+  "productId": {
+    "$type": "number"
+  },
+  "productName": {
+    "$type": "string"
+  }
+}
+```
+
+Valid object:
+```json
+{
+  "productId": 1,
+  "productName": "iphone 11"
+}
+```
+
+Invalid object:
+```json
+{
+  "foo": "bar"
+}
+```
+
+Validation errors:
+```json
+[
+  {
+    "validator": "$required",
+    "path": "productId"
+  },
+  {
+    "validator": "$required",
+    "path": "productName"
+  }
+]
 ```
 
 ## Shortcuts
