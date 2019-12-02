@@ -33,12 +33,10 @@ This spec is a very simple format for the most common cases.
 <!-- tocstop -->
 
 ## Principles
-* JSON micro schema is a normal JSON object with validation keywords started with `$`.
-* Built-in list of validators is minimal and covers the most common cases.
-  For other tasks custom validators should be used.
-* Validation process returns array of errors.
-  Each error contains validator name and dot-path to invalid object property.
-  Empty array means validation is ok.
+* All keywords started with `$`.
+* Built-in validators cover most common cases.
+* Custom validators can be easily added.
+* No code-generation.
 
 ## Example
 Schema:
